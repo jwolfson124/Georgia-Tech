@@ -44,12 +44,19 @@ def max_profit_on_day(j, prices)
   gain = sell - best_buy #this is the profit that you can make
   return max(gain,0) #this will return the higher of either the gain or 0
 
-for j in range(1, len(prices)):
-  max_gain = 0
-  for j in range(1, len(prices)):
-    gain = max_profit_on_day(j, prices)
+for j in range(1, len(prices)): #this will run through all of the days and start 1 day in because you can't start at the first dat
+  max_gain = 0 #initalize the variable
+  for j in range(1, len(prices)): #go through each possible slice
+    gain = max_profit_on_day(j, prices) #calculate the best price using the function created above
     max_gain = max(max_gain, gain)
   return max_gain
+
+def max_profit_v2():
+
+  min_prices - list(accumulate(prices, func=min)) #this will run through the list and choose the min data point up to that data point
+  gains = [sell - best_buy for sell, best_buy in zip(prices[1:], min_prices[:-1])] #this will create a list of values that will take the best_buy and subtract the min from that point
+                                                                                   #the slices make sure that the prices are for the previous day and then the sell price for the current
+  return max(gains)
 
 
 
