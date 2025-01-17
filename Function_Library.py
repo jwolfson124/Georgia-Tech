@@ -19,3 +19,9 @@ x = [1,[2,3]]
 bad_copy = x.copy()
 good_copy = copy.deepcopy(x)
 #the deep copy will keep the index 1 nested properly
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Function object.reverse()
+Definition: This will reverse a list that you have
+x = [1,2,3]
+x.reverse()
+x = [3,2,1]
