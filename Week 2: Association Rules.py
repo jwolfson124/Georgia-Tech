@@ -12,8 +12,17 @@ def make_itemsets(words):
 -------------------------------------------------------------------------------------
 #implement a function that enumerates all item-pairs within an itemset and updates a table in-place that tracks the count of those item pairs
 def update_pair_counts (pair_counts, itemset):
-  
+  from collections import defaultdict
+  from itertools import combinations
 
+  for (a, b) in combinations(itemset, 2): #this function will return the possible combinations for each itemset combination of 2 so [a,b,c] would return (a,b), (b,c), (a,c)
+    pair_counts[(a, b)] += 1
+    pair_counts[(b, a)] += 1
+-------------------------------------------------------------------------------------
+#given an itemset update a table to track counts of each item
+def update_item_counts(item_counts, itemset):
+  for a in itemset:
+    item_counts[a] += 1
 -------------------------------------------------------------------------------------
 #creating a filter rules by confidence
 def filter_rules_by_conf(pair_counts, item_counts, threshold):
