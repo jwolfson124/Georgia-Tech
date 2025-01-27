@@ -38,3 +38,38 @@ def update_pair_counts (pair_counts, itemset):
     for (a, b) in combinations(itemset, 2):
         pair_counts[(a, b)] += 1
         pair_counts[(b, a)] += 1
+
+  -----------------------------------------------------------------------------
+#create a function that will update itemcounts based on itemsets that are put into a code
+def update_item_counts(item_counts, itemset):
+    ###
+    ### YOUR CODE HERE
+    for letter in itemset:
+        item_counts[letter] += 1
+
+    return item_counts
+
+  -----------------------------------------------------------------------------
+#write a code that is going to take in a group of pairs and the amount of times they appear and then divide them by the times that specific item has appeared
+#this will return a set of "rules" which will be used to help identify how often item sets appear together
+def create_rules_from_counts(pair_counts, item_counts):
+    rules = {} # (item_a, item_b) -> conf (item_a => item_b)
+    ###
+    ### YOUR CODE HERE
+    for (a, b) in pair_counts:
+        rules[(a, b)] = pair_counts[(a,b)] / item_counts[a]
+    return rules
+
+-----------------------------------------------------------------------------
+#create a code that will output a certain set of rules
+def filter_rules_by_conf(rules, threshold):
+    ###
+    ### YOUR CODE HERE
+
+    rules_output = {}
+
+    for rule in rules:
+        if rules[rule] >= threshold:
+            rules_output[rule] = rules[rule]
+
+    return rules_output
