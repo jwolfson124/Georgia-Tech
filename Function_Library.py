@@ -20,8 +20,14 @@ bad_copy = x.copy()
 good_copy = copy.deepcopy(x)
 #the deep copy will keep the index 1 nested properly
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Function object.reverse()
+Function: object.reverse()
 Definition: This will reverse a list that you have
 x = [1,2,3]
 x.reverse()
 x = [3,2,1]
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Function: int(item, base)
+Definition: this will turn a string into a number or multiply the numbers by the base and their place in the number
+item = "11010"
+base = 10
+item = (1 * (10**5)) + (1 * (10**4)) etc
