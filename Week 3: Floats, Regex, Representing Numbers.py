@@ -5,4 +5,4 @@ def alg_sum(x):
     s+= i
 
 return s
-#how to prove that is true?
+#how to prove that is true understanding this equation function(a+b) = (a+ b)(1+d) |d| <= epsiolon
