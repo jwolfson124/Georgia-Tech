@@ -84,3 +84,16 @@ c = [0] + [position+1 for position, (left, right) in list(enumerate(zip_neighbor
 splits = [s[i:j] for i, j in zip_neighbors(c)] #returns a list of the indiciese
 max(splits, key=len) #returns the largest length found in splits
 
+#solution 3
+s = 'bbbaaabaaaa'
+#goal: t = 'bbb|aaaa|b|aaa'
+#t.split('|')
+
+
+t = ''
+
+for u, v in zip_neighbors(s):
+  t += u
+  if u != v:
+    t+= '|'
+t + s[-1:]
