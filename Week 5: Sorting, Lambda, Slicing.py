@@ -43,7 +43,6 @@ test = {
 }
 
 #solution 1
-#step 1: Initialize the outputs so that an empty string is going to give you the desired output
 def longest_consecutive_subsequence(s):
   best, best_count = "",0
   prev, prev_count = "", 0
@@ -65,7 +64,22 @@ def longest_consecutive_subsequence(s):
       best = prev
       best_count = prev_count
   return best, best_count
-#step 2:
+
+#solution 2
+s = 'bbbaaabaaaa'
+#location = [s[0:3], s[3:6], s[6:7], s[7:11]]
+#max(location, key = len)
+
+def zip_neighbors(s):
+  return list(zip(s[:-1], s[1:]))
+
+#will output [(b,b), (b,b), (b,a)...]
+
+list(enumerate(zip_neighbors(s)))
+#will return [(0, (b,b)), (1, (b,b)), (2, (b,a))...]
+
+[0] + [position+1 for position, (left, right) in list(enumerate(zip_neighbors(s))) if left != right] 
+#this will give you the different indexs where the left does not match the right
 
 
 
