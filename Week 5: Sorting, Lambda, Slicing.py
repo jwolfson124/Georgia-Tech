@@ -78,8 +78,9 @@ def zip_neighbors(s):
 list(enumerate(zip_neighbors(s)))
 #will return [(0, (b,b)), (1, (b,b)), (2, (b,a))...]
 
-[0] + [position+1 for position, (left, right) in list(enumerate(zip_neighbors(s))) if left != right] 
+c = [0] + [position+1 for position, (left, right) in list(enumerate(zip_neighbors(s))) if left != right] 
 #this will give you the different indexs where the left does not match the right
 
-
+splits = [s[i:j] for i, j in zip_neighbors(c)] #returns a list of the indiciese
+max(splits, key=len) #returns the largest length found in splits
 
