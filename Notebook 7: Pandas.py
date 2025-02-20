@@ -137,3 +137,35 @@ display(cafes_pricey)
 
 pd.concat([cafes_cheap, cafes_pricey]) #this line will put them back together
 
+#get a random sample
+dataset.sample(5) #this will get you a random sample of the dataset
+dataset.describe() #this will summarize numerical data
+dataset['column'].unique() #will give you a list of all unique values in that column
+
+#example of using assigning values to all rows
+party = {name: 'D' if name == 'Obama' else 'R' for name in unique_candidates}
+#using this information to add on to the different datasets
+sample = data['column'].sample(5)
+sample.map(party)
+
+data['party'] = data['name'].map(party)
+
+#summing columns
+data['column'].sum()
+
+#count entries to the different rows
+data['party'].value_counts()
+
+#use groupby to sort data
+data.groupby('party')['reciept_amounts'].sum()
+
+#limiting the dataset based on values
+keep_candidates = {'obama', 'romney'}
+matches = data['candidate_name'].apply(lambda x: x in keep_candidates)
+
+#create a pivot table
+by_occ = data.pivot_table('contb_receipt_amt', index='contbr_occupation', columns='party', aggfunc='sum')
+
+
+
+
