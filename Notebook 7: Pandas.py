@@ -209,7 +209,50 @@ def cast(df, key, avlue, join_how='outer'):
 
   return tibble
 
-#delimitting pandas dataframe
+#SAMPLE PROBLEM FOR EDITING DATASETS
+#1. all the columns that start with new should become a single variable called case_type
+#2 remove the is02 and is03 columns since they are redundent
+#3 keep the year column as a variable
+#4 remove all NaN counts: can use python's Math.isnan() function to help
+#5 convert the counts to integers
+
+#Exercise 8
+from math import isnan
+who_raw = data
+
+col_vals = who_raw.columns.difference(['country', 'iso2', 'iso3', 'year'])
+who2 = melt(who_raw, col_vals, 'case_type', 'count')
+del who2['iso2']
+del who2['iso3']
+who2 = who2[who2['count'].apply(lambda x: not isnan(x))]
+
+#exercise 9
+#starting from the who2 dataframe crate a new tibble, who3, for which each key, value split into three new variables
+#'type', 'gender', age_group
+
+def who_splitter(text):
+  m = re.match("^new_?(rel|ep|sn|sp)_(f|m)(\d{2,4})$", text)
+  if m is None or len(m.groups()) != 3:
+    return ['','','']
+
+  fields = list(m.groups())
+  if fields[1] == 'f':
+    fields[1] = 'female'
+  elif fields [1] == 'm':
+    fields[1] = 'male'
+
+  if fields[2] == '014':
+    fields[2] = '0-14'
+  elif fields[2] == '65':
+    fields[2] = '65+'
+  elif len(fields[2]) == 4 and fields[2].isdigit():
+    fields[2] = fields[2][0:2] + '-' + fields[2][2:4]
+
+  return fields
+    
+
+
+
             
 
 
