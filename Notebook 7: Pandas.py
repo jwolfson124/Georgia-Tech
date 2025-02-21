@@ -166,6 +166,52 @@ matches = data['candidate_name'].apply(lambda x: x in keep_candidates)
 #create a pivot table
 by_occ = data.pivot_table('contb_receipt_amt', index='contbr_occupation', columns='party', aggfunc='sum')
 
+#MERGING DATASETS
+A = datset1
+B = dataset2
+
+C = A.merge(B, on=['column1', 'column2'])
+
+#different join options
+C = A.merge(B, on=['column1', 'column2'], how = 'outer')
+C = A.merge(B, on=['column1', 'column2'], how = 'left')
+C = A.merge(B, on=['column1', 'column2'], how = 'right')
+
+#VECTOR MATH ON A DATAFRAME for changing year to just be the last 2 digits
+table['year'] = table['year'].apply(lambda x: "'{:0d}".format(x % 100))
+
+
+#MELTING A TABLE
+def melt(df, col_vals, key, value):
+  keep_vars = df.columns.difference(col_vals) #returns the column values not in df
+  melted_sections = [] #empty dataframe
+  for c in col_vals:
+    melted_c = df[keep_vars].copy()
+    melted_c[key] = c
+    melted_c[value] = df[c]
+    melted_sections.append(melted_c)
+
+  melted = pd.concat(melted_sections)
+  return melted
+
+
+#CASTING A TABLE
+def cast(df, key, avlue, join_how='outer'):
+  fixed_vars = df.columns.difference(['key','value'])
+  tibble = pd.DataFrame (columns=fixed_vars) #empty frame
+
+  new_vars = df[key].unique()
+  for v in new_vars:
+    df_v = df[df[key] == v]
+    del df_v[key]
+    df_v = df_v.rename(columns={value:v})
+    tiblle = tibble.merge(df_v, on=list(fixed_Vars), how=join_how)
+
+  return tibble
+
+#delimitting pandas dataframe
+            
+
 
 
 
