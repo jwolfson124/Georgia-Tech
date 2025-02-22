@@ -78,9 +78,21 @@ cafes2['price'] = '$$'
 price_as_ints = cafes2['price'].apply(len) #takes the length of each price or .apply(lambda s: len(s))
 cafes2['value'] = cafes2['rating'] / price_as_ints #this will now divide the rating by the lenth of the price
 
+#MULTIPLE WAYS TO SOLVE THIS PROBLEM
 #increasing price based on zip codes
 cafes3 = cafes2.copy()
-is_fancy = cafes3['zip'].isin({30325})
+is_fancy = cafes3['zip'].isin({30325}) #returns true false values
+
+#one way to make the changes
+cafes3.loc[is_fancy, 'price'] += '$' #this is going to use the true and false values to update the table
+
+fancy_shops = cafes4.index[is_fancy]
+fancy_markup =  Series(['$'] * len(fancy_shops), index=fancy_shops)
+
+is_fancy * Series(['$'] * len(is_fancy), index = is_fancy.index) #this will give you all of the different indexes and if it is True than it will give you a '$' sign
+cafes4['price] += is_fancy.apply(lambda e: e * '$') 
+
+
 
 
 
