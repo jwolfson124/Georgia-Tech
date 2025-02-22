@@ -1,3 +1,5 @@
+##SERIES
+
 from pandas import DataFrame, Series
 
 #putting a list into a series, biggest difference is that a list can have items with different types whereas a Series can not
@@ -42,5 +44,50 @@ obj3 + 5 #will add 5 to every value
 #name the series:
 obj3.name = 'peep'
 
+#DATAFRAME: Creating and getting basic info from
+cafes = DataFrame({'name': ['name1', 'name2', 'name3'],
+                  'zip' : [30325, 30324, 30233]})
+cafes.columns #will result in name, zip both columns are Series!
+cafes['zip'] #to reference the column zip
+cafes.index #will return the row values start and end point
+
+#choosing specific columns
+target_fields = ['zip']
+cafes[target_fields] #this will create a dataframe with only those referenced columns
+
+#slicing
+cafes[1::2] #this will take every other row
+
+#changing the index
+cafes2 = cafes['zip']
+cafes2.index = cafes['name']
+cafes2.index.name = None #remove the index name
+#now the indexs will be the name
+
+#referencing subsets of rows
+cafes2.loc[['name1', 'name2']] #this will refernce the names of those shops
+
+#referencing by index location
+cafes2.iloc[[1,3]] #this will give the same result but uses the index location instead of the name
+
+#creating new columns
+cafes2['rating'] = 4.0 #this will be applied to all of the different rows
+cafes2['price'] = '$$'
+
+#using math to create new column values
+price_as_ints = cafes2['price'].apply(len) #takes the length of each price or .apply(lambda s: len(s))
+cafes2['value'] = cafes2['rating'] / price_as_ints #this will now divide the rating by the lenth of the price
+
+#increasing price based on zip codes
+cafes3 = cafes2.copy()
+is_fancy = cafes3['zip'].isin({30325})
+
+
+
+
+
+
+                 
+                   
 
 
