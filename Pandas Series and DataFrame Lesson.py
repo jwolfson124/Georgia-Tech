@@ -92,14 +92,32 @@ fancy_markup =  Series(['$'] * len(fancy_shops), index=fancy_shops)
 is_fancy * Series(['$'] * len(is_fancy), index = is_fancy.index) #this will give you all of the different indexes and if it is True than it will give you a '$' sign
 cafes4['price] += is_fancy.apply(lambda e: e * '$') 
 
+cafes4.apply(lambda x: repr(type(x))) #will return type for the different columns
+cafes4.apply(lambda x: print(x), axis=1) #will return type for all rows based on the index
 
+#using apply with a function
+def calc_value(row):
+  return row['rating'] / len(row['price'])
 
+cafes4['value'] = cafes4.apply(calc_value, axis=1)
+#OR
+vafes4['value'] = cafes['rating'] / cafes4['price'].apply(len)
 
+#USING CONCAT
+is_cheap = cafes4['price'] <= '$$'
+cafes_cheap = cafes4[is_cheap]
+cafes_pricey = cafes4[~is_cheap]
 
+#recombines the two different dataframes
+pd.concat([cafes_cheap, cafes_pricey])
 
+#using indexs
+cafes4.index.isin(['brash', '3heart']) #this will return an array of true and false
 
+#reindexing
+cafes5 = cafes4.reindex(Index(['3heart', 'starbucks'])) #this will give you a data table with the same values for 3heart however starbucks will only have NaN
 
-                 
-                   
+cafes4.reset_index(drop=True) #resets the index to integer and then the old index becomes a column, if drop=True then it will drop the old index from becoming a colummn
+
 
 
