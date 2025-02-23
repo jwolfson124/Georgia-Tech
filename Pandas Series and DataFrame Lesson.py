@@ -119,5 +119,6 @@ cafes5 = cafes4.reindex(Index(['3heart', 'starbucks'])) #this will give you a da
 
 cafes4.reset_index(drop=True) #resets the index to integer and then the old index becomes a column, if drop=True then it will drop the old index from becoming a colummn
 
-
-
+#accessing rows example
+largest_donors = fecmain['amount'].nlargest(7) #this will give you the 7 largest numbers from the pandas dataframe and their index
+fecmain.loc[largest_donors.index]
