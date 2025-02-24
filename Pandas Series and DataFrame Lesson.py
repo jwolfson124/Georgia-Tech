@@ -122,3 +122,18 @@ cafes4.reset_index(drop=True) #resets the index to integer and then the old inde
 #accessing rows example
 largest_donors = fecmain['amount'].nlargest(7) #this will give you the 7 largest numbers from the pandas dataframe and their index
 fecmain.loc[largest_donors.index]
+
+#using groupby
+grouped = fecmain.groupby('cand_nm') #this is used to help prepare the data and returns different tables for each of the candidates
+grouped['amount'].nlargest(3) #this will then use those "different" tables to show you the largest 3 for each candidate
+
+grouped.apply(lambda x: type(x)) #this will go through each of the candidate names dataframes
+grouped.apply(type)
+
+#getting the different groups after groupby
+grouped.groups #will show you the different groups available and their index values
+grouped.get_group('Obama, Barack') #this will get you the one specific group that you are looking for
+
+
+
+
