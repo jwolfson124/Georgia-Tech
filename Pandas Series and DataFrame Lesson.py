@@ -1,3 +1,20 @@
+#general data from pandas
+data.describe #will result in each variable giving information on means, counts, min, maxs etc
+data['column'].head() #gives the first 5 values in the column, could be multiple columns
+data.iloc[5:10] #data at indexs 5-9
+data[data['column'] > 5.0] #returns all values for the data with the column that fits the condition
+data['column'].max() #returns the max
+data['column'].unique() #returns the unique values
+data.sort_values(by='column', ascending = False) #this will sort the data by the column in asc or desc order
+data.sort_values(by='column', ascending = False).iloc[5:10] #this orders the data and then takes the data from ranges 5-10
+data.sort_values(by='column', ascending=False).loc[5:84] #this all depends on the new order of the data as the indexs have not been reset so iloc might make more sense
+data['x'] = 3.14 #introduce a new column that has the value 3.14
+data.rename(columns={'species': 'type'}) #renames the collumn species to the column name type
+del data['column'] #deletes the column name
+C = A.merge (B, on=['column1', 'column2'], how = 'outer') #this code joins two data sets, can also be 'left' or 'right' inputs to how
+data['year'] = data['year'].apply(lambda x: "'{:02d}".format(x % 100)) #this is an example of how to change the year format for a column
+
+
 ##SERIES
 
 from pandas import DataFrame, Series
@@ -99,7 +116,7 @@ cafes4.apply(lambda x: print(x), axis=1) #will return type for all rows based on
 def calc_value(row):
   return row['rating'] / len(row['price'])
 
-cafes4['value'] = cafes4.apply(calc_value, axis=1)
+cafes4['value'] = cafes4.apply(calc_value, axis=1) #this indicates that this calculation should be done to each row
 #OR
 vafes4['value'] = cafes['rating'] / cafes4['price'].apply(len)
 
