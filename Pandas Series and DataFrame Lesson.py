@@ -13,6 +13,19 @@ data.rename(columns={'species': 'type'}) #renames the collumn species to the col
 del data['column'] #deletes the column name
 C = A.merge (B, on=['column1', 'column2'], how = 'outer') #this code joins two data sets, can also be 'left' or 'right' inputs to how
 data['year'] = data['year'].apply(lambda x: "'{:02d}".format(x % 100)) #this is an example of how to change the year format for a column
+assert_frame_equal(df_A, df_B) #there are many different edits to make. The best use of this is to use the function canoincalize_tibble before entering the dataframes.
+
+def canonicalize_tibble(X):
+    # Enforce Property 1:
+    var_names = sorted(X.columns)
+    Y = X[var_names].copy()
+
+    ###
+    ### YOUR CODE HERE
+    Y = Y.sort_values(by=var_names).reset_index(drop=True)
+    
+    return Y
+
 
 
 ##SERIES
