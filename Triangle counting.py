@@ -45,6 +45,26 @@ Z = costars_df.rename(columns={'a' : 'c', 'b': 'a'})
 XY = X.merge(Y, on='b')
 XYZ = XY.merge(Z, on=['a', 'c'])
 
+XYZ.head()
+
+##Linear Algebra + Numpy/Scipy
+#matrix G where each entry Ga,b is 1 if actors a and b co-starred together
+#therefore
+#Ga,b * Gb,c * Gc,a would equal 1
+vals = ones(len(costars_df)) #create the values of the matrix
+rows = costars_df['a'].values
+cols = costars_df['b'].values
+
+G = coo_matrix((vals, (rows, cols))).tocsr() #create G which is now the new matrix we will use
+
+tri_count = int(G.multiply(G.dot(G)).sum()/6)
+#first what we are doing is a G.dot(G) matrix product. If G[a,c] > 0 it means that actor a and actor c have at least one mutual costar
+#therefore what we are doing here G[a,b] = 1 and G[b,c] = 1. This would return G[a,c]
+#when you add in the G.multiply it checks to make sure that G[a,c] actually exists
+#each triangle would be counted 6 times so we have to divide by 6
+
+
+
 
 
 
